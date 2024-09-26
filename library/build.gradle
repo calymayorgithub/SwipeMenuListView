@@ -29,9 +29,8 @@ task sourcesJar(type: Jar) {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            from components.java
-            
-            // Agregar el JAR de fuentes
+            // Cambiar 'from components.java' a 'from android.publication'
+            from components.release // o from components.release si tienes componentes de librería
             artifact sourcesJar
         }
     }
