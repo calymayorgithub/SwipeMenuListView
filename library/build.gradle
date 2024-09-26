@@ -31,7 +31,7 @@ group = "com.baoyz.swipemenulistview"
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            from components.release
+            from components.findByName('release')
             groupId = group
             artifactId = 'SwipeMenuListView'
             version = version
