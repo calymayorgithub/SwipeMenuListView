@@ -20,46 +20,24 @@ android {
     }
 }
 
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:support-v4:22.1.1' 
+// Crear el JAR de fuentes
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    archiveClassifier.set('sources')
 }
-
-version = "1.3.0"
-group = "com.baoyz.swipemenulistview"
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            from components.findByName('release')
-            groupId = group
-            artifactId = 'SwipeMenuListView'
-            version = version
-
-            // Define the artifacts that will be published (e.g. aar and source files)
-            artifact("$buildDir/outputs/aar/library-release.aar")
-
-            // Optional sources and javadoc artifacts
+            from components.java
+            
+            // Agregar el JAR de fuentes
             artifact sourcesJar
-            artifact javadocJar
         }
     }
-    repositories {
-        mavenLocal()
-    }
 }
 
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-
-task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:support-v4:22.1.1'
 }
