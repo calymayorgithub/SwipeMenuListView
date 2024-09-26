@@ -30,7 +30,7 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             // Cambiar 'from components.java' a 'from android.publication'
-            from components.release // o from components.release si tienes componentes de librería
+            from components.findByName('release')
             artifact sourcesJar
         }
     }
